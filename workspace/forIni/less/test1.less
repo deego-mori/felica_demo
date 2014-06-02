@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+@color-base : #f00;
+@size-h1: 20px;
+
+.borderMixin(@border-color: green){
+  border: 20px solid @border-color;
+}
+
+h1{
+  font-size: @size-h1;
+  color: @color-base;
+  .borderMixin;
+}
+
+.page2 h1{
+  .borderMixin(blue);
+}
