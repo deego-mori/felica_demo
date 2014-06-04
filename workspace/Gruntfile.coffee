@@ -37,6 +37,7 @@ module.exports = (grunt) ->
         src: ['*.css']
         dest: '<%= paths.cssmin %>'
         ext: '.min.css'
+        # IEハック用のCSSが消えないように設定
         options:
           noAdvanced: true
     #画像の圧縮
@@ -97,8 +98,13 @@ module.exports = (grunt) ->
         ]
     #不要なファイルの削除
     clean:
+      options:
+        # カレントディレクトリ外のファイルの削除を許可
+        force: true
       up:
         src: ["<%= paths.css %>common.css"]
+      dev:
+        src: ["<%= paths.css %>common.min.css"]
     #browserSync
     browserSync:
       dev:
@@ -135,6 +141,9 @@ module.exports = (grunt) ->
   grunt.registerTask 'build', [
     'less:compile', 'concat:compile', 'copy:dev', 'replace:dev'
   ]
+  grunt.registerTask 'dev', [
+    'less:compile', 'concat:compile', 'copy:dev', 'replace:dev', 'clean:dev'
+  ]
   grunt.registerTask 'up', [
-   'less:compile', 'concat:compile', 'cssmin:compile', 'copy:up', 'replace:up'
+    'less:compile', 'concat:compile', 'cssmin:compile', 'copy:up', 'replace:up', 'clean:up'
   ]
