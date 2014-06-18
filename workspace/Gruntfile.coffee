@@ -117,7 +117,7 @@ module.exports = (grunt) ->
         options:
           #watchが実行されてから
           watchTask: true
-          # startPath: '<%= paths.up %>index.html'
+          # startPath: 'index.html'
           server:
             baseDir: '<%= paths.up %>'
             index: 'index.html'
